@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Haikal ❤️ Ame</title>
+
+    <style>
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+      }
+
+      /* SECTION ANIMATION */
+      .section {
+        height: 100vh;
+        scroll-snap-align: start;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        color: white;
+        padding: 20px;
+
+        opacity: 0;
+        transform: translateY(50px);
+        transition: all 1s ease;
+      }
+
+      .section.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Background */
+      .section:nth-child(1) {
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      }
+      .section:nth-child(2) {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      }
+      .section:nth-child(3) {
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+      }
+      .section:nth-child(4) {
+        background: linear-gradient(135deg, #fbc2eb, #a6c1ee);
+      }
+
+      /* Gallery */
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 500px;
+      }
+
+      .gallery img {
+        width: 90px;
+        margin: 6px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+        cursor: pointer;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.1);
+      }
+
+      /* Typing */
+      #typing {
+        margin-top: 20px;
+        min-height: 100px;
+      }
+
+      /* Button */
+      button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        background: white;
+        color: #ff4b5c;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      /* Surat */
+      .letter {
+        display: none;
+        background: white;
+        color: black;
+        padding: 20px;
+        border-radius: 15px;
+        width: 70%;
+        margin-top: 20px;
+      }
+
+      /* Animasi */
+      .heart,
+      .star {
+        position: fixed;
+        animation: floatUp linear infinite;
+      }
+
+      @keyframes floatUp {
+        0% {
+          bottom: -10%;
+          opacity: 1;
+        }
+        100% {
+          bottom: 100%;
+          opacity: 0;
+        }
+      }
+
+      /* ZOOM OVERLAY */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      .overlay img {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HALAMAN 1 -->
+    <div class="section">
+      <h1>Haikal Djalatim ❤️ Ame Milani Pasman</h1>
+      <p id="days"></p>
+      <p>Scroll ke bawah yaa😁</p>
+    </div>
+
+    <!-- HALAMAN 2 -->
+    <div class="section">
+      <div id="typing"></div>
+      <button onclick="startLove()">Start</button>
+    </div>
+
+    <!-- HALAMAN 3 -->
+    <div class="section">
+      <h2>Our Photos Together</h2>
+
+      <div class="gallery">
+        <img src="foto1.jpg" onclick="zoom(this)" />
+        <img src="foto2.jpg" onclick="zoom(this)" />
+        <img src="foto3.jpg" onclick="zoom(this)" />
+        <img src="foto4.jpg" onclick="zoom(this)" />
+        <img src="foto5.jpg" onclick="zoom(this)" />
+        <img src="foto6.jpg" onclick="zoom(this)" />
+        <img src="foto7.jpg" onclick="zoom(this)" />
+      </div>
+    </div>
+
+    <!-- HALAMAN 4 -->
+    <div class="section">
+      <button onclick="openLetter()">Open the letter 💌</button>
+
+      <div class="letter" id="letter">
+        <h3>for us</h3>
+        <p>
+          Among the many journeys that have ever existed, ours is the one we
+          wish to cherish the most. We were not always brought together under
+          perfect circumstances, yet it is within those imperfections that we
+          learned to understand one another. Slowly, without even realizing it,
+          the paths that once stood apart have begun to walk side by side,
+          united in the same direction. We may not always be strong, and the
+          days we face are not always easy. There will be moments when weariness
+          arrives uninvited, when silence lingers longer than it should. Yet, in
+          all those moments, we choose to stay—not because everything is
+          perfect, but because we believe that being together is reason enough
+          to endure. In this togetherness, we come to understand that love is
+          not merely something to be spoken, but a choice to be renewed each
+          day. We choose to hold on to one another, even when the world feels
+          distant. We choose to be each other’s strength, even when we ourselves
+          feel fragile. We are two souls walking side by side, completing one
+          another in the simplest of ways. Not always through grand gestures,
+          but through the quiet, often unseen acts of care. In the laughter we
+          share, in the stories we keep, and in the silence that still feels
+          warm—there, our love grows, slowly yet surely. And if one day time
+          puts us to the test, let us remember why we began. For in the end, it
+          is not about how perfect the journey is, but about how we choose not
+          to let go of each other. So as long as time still grants us the
+          chance, let us continue walking together—building hope, nurturing
+          trust, and protecting what we have. For among all the possibilities
+          that exist, we have chosen each other— and it is a choice we will
+          continue to keep, today, tomorrow, and always.
+        </p>
+      </div>
+    </div>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay" onclick="closeZoom()">
+      <img id="zoomImg" />
+    </div>
+
+    <audio id="music" src="lagu.mp3"></audio>
+
+    <script>
+      // tanggal jadian
+      const startDate = new Date("2026-03-29");
+      const today = new Date();
+      const diffTime = today - startDate;
+      const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+      document.getElementById("days").innerText =
+        "We have been together for " + days + " days";
+
+      // typing
+      const text =
+        "This is about us...\nHaikal & Ame\nNot just today,\nbut forever💕";
+      let i = 0;
+
+      function startLove() {
+        document.getElementById("music").play();
+        typeWriter();
+      }
+
+      function typeWriter() {
+        if (i < text.length) {
+          document.getElementById("typing").innerHTML +=
+            text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+          i++;
+          setTimeout(typeWriter, 50);
+        }
+      }
+
+      // surat
+      function openLetter() {
+        document.getElementById("letter").style.display = "block";
+      }
+
+      // zoom foto
+      function zoom(img) {
+        document.getElementById("overlay").style.display = "flex";
+        document.getElementById("zoomImg").src = img.src;
+      }
+
+      function closeZoom() {
+        document.getElementById("overlay").style.display = "none";
+      }
+
+      // animasi scroll
+      const sections = document.querySelectorAll(".section");
+
+      function showOnScroll() {
+        sections.forEach((sec) => {
+          const top = sec.getBoundingClientRect().top;
+          if (top < window.innerHeight - 100) {
+            sec.classList.add("show");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", showOnScroll);
+      showOnScroll();
+
+      // animasi
+      function createHeart() {
+        const el = document.createElement("div");
+        el.classList.add("heart");
+        el.innerHTML = "❤️";
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.fontSize = Math.random() * 20 + 10 + "px";
+        el.style.animationDuration = Math.random() * 3 + 3 + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 6000);
+      }
+
+      function createStar() {
+        const el = document.createElement("div");
+        el.classList.add("star");
+        el.innerHTML = "✨";
+        el.style.left = Math.random() * 100 + "vw";
+        el.style.fontSize = Math.random() * 15 + 10 + "px";
+        el.style.animationDuration = Math.random() * 4 + 3 + "s";
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 7000);
+      }
+
+      setInterval(createHeart, 400);
+      setInterval(createStar, 600);
+    </script>
+  </body>
+</html>
